@@ -76,7 +76,7 @@ args = ["-db", "/path/to/vcontext.db"]
 Add the server via CLI:
 
 ```bash
-claude mcp add vcontext -- /path/to/vcontext -db /path/to/vcontext.db
+claude mcp add --transport stdio vcontext -- /path/to/vcontext -db /path/to/vcontext.db
 ```
 
 ## Version
