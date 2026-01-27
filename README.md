@@ -26,6 +26,8 @@ REPO=vietrix/vcontext bash scripts/install.sh
 .\scripts\install.ps1 -Repo "vietrix/vcontext"
 ```
 
+After installation, make sure the install directory is on your `PATH` so you can run `vcontext` directly.
+
 ### Option 4: Go install
 
 ```bash
@@ -51,7 +53,7 @@ The server reads JSON-RPC requests line-by-line from stdin and writes responses 
 
 1. `-db` flag
 2. `VCONTEXT_DB_PATH` environment variable
-3. `./vcontext.db` (default)
+3. `$XDG_CONFIG_HOME/vcontext/vcontext.db` or OS equivalent
 
 ## MCP setup
 
@@ -60,15 +62,15 @@ The server reads JSON-RPC requests line-by-line from stdin and writes responses 
 Add the server via CLI:
 
 ```bash
-codex mcp add vcontext -- /path/to/vcontext -db /path/to/vcontext.db
+codex mcp add vcontext -- vcontext
 ```
 
 Or in `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.vcontext]
-command = "/path/to/vcontext"
-args = ["-db", "/path/to/vcontext.db"]
+command = "vcontext"
+args = []
 ```
 
 ### Claude Code
@@ -76,7 +78,33 @@ args = ["-db", "/path/to/vcontext.db"]
 Add the server via CLI:
 
 ```bash
-claude mcp add --transport stdio vcontext -- /path/to/vcontext -db /path/to/vcontext.db
+claude mcp add --transport stdio vcontext -- vcontext
+```
+
+### One-command helper (no absolute path)
+
+Linux/macOS:
+
+```bash
+./scripts/mcp-add.sh codex
+./scripts/mcp-add.sh claude
+```
+
+Windows PowerShell:
+
+```powershell
+.\scripts\mcp-add.ps1 -Client codex
+.\scripts\mcp-add.ps1 -Client claude
+```
+
+Optional custom DB:
+
+```bash
+./scripts/mcp-add.sh codex --db /path/to/vcontext.db
+```
+
+```powershell
+.\scripts\mcp-add.ps1 -Client codex -DbPath C:\path\to\vcontext.db
 ```
 
 ## Version

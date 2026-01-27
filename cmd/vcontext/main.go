@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strings"
 
 	"vcontext/internal/common"
@@ -70,7 +71,18 @@ func resolveDBPath() string {
 		return env
 	}
 
-	return "vcontext.db"
+	return defaultDBPath()
+}
+
+func defaultDBPath() string {
+	configDir, err := os.UserConfigDir()
+	if err != nil || configDir == "" {
+		return "vcontext.db"
+	}
+
+	dir := filepath.Join(configDir, "vcontext")
+	_ = os.MkdirAll(dir, 0o755)
+	return filepath.Join(dir, "vcontext.db")
 }
 
 func handleSubcommand(logger *log.Logger) bool {
