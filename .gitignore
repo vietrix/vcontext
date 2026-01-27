@@ -1,0 +1,7 @@
+/dist/
+/bin/
+/vcontext
+/vcontext.exe
+*.db
+*.log
+.DS_Store
