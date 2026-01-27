@@ -62,7 +62,7 @@ The server reads JSON-RPC requests line-by-line from stdin and writes responses 
 Add the server via CLI:
 
 ```bash
-codex mcp add vcontext -- vcontext
+vcontext mcp add codex
 ```
 
 Or in `~/.codex/config.toml`:
@@ -78,7 +78,7 @@ args = []
 Add the server via CLI:
 
 ```bash
-claude mcp add --transport stdio vcontext -- vcontext
+vcontext mcp add claude
 ```
 
 ### One-command helper (no absolute path)
@@ -95,6 +95,16 @@ Windows PowerShell:
 ```powershell
 .\scripts\mcp-add.ps1 -Client codex
 .\scripts\mcp-add.ps1 -Client claude
+```
+
+### Advanced (custom DB)
+
+```bash
+vcontext mcp add codex --db /path/to/vcontext.db
+```
+
+```powershell
+vcontext mcp add claude --db C:\path\to\vcontext.db
 ```
 
 Optional custom DB:
